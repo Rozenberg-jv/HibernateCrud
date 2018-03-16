@@ -13,7 +13,7 @@ import java.util.List;
 
 public class HibernateXmlExample {
 
-    IDao dao;
+    BookDaoCriteria dao;
 
     public void execCritariaDaoExample() {
         dao = new BookDaoCriteria();
@@ -23,31 +23,35 @@ public class HibernateXmlExample {
 //        list.add(new Author("Vasily Petrov", 35, "M.D."));
 //        list.add(new Author("Petr Vasiliev", 45, "Ph.D."));
 
-        list.add(new Author("Igor Anreev", 25, "writer"));
+        /*list.add(new Author("Igor Anreev", 25, "writer"));
         list.add(new Author("Andrew Igorev", 51, "reader"));
         list.add(new Author("Semen Semenov", 26, "artist"));
-        Book book = new Book("title2", 12303, list);
-        dao.add(book);
-        System.out.println(" :>> Print all records: ");
-        List<Book> all = dao.getAll();
-        for (Book b : all) {
-            System.out.println(b);
-        }
-//        book.setTitle("updated");
-//        dao.update(book);
-//        list.remove(0);
-//        list.remove(1);
-        List list2 = new ArrayList();
-        list2.add(new Author("Alenas Pupkins", 29, "she"));
-        book.setAuthors(list2);
-        dao.update(book);
-        System.out.println(" :>> Print all records: ");
-        all = dao.getAll();
-        for (Book b : all) {
-            System.out.println(b);
-        }
+        Book book = new Book("title2", 12304, list);
+        dao.add(book);*/
+//        System.out.println(" :>> Print all records: ");
+//        List<Book> all = dao.getAll();
+//        for (Book b : all) {
+//            System.out.println(b);
+//        }
 
-//        dao.delete(book.getId());
+        /*Book book = dao.get(17);
+        book.setISBN(132);
+        list.add(new Author("q", 1, "w"));
+        book.setAuthors(list);
+        Book book2 = dao.get(17);
+//        dao.update(book);
+        System.out.println(book);
+        System.out.println(book2);*/
+
+        list.add(new Author("new", 111, "new"));
+//        list.add(new Author("t2", 3, "b2"));
+        Book newbook = new Book("new", 13333, list);
+        newbook.setId(17);
+
+        dao.update(newbook);
+
+//        dao.delete(17);
+//        dao.getAllAuthors().forEach(System.out::println);
         dao.finish();
     }
 }

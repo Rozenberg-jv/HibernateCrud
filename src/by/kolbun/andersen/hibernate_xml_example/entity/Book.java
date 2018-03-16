@@ -80,7 +80,7 @@ public class Book {
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + ISBN;
         result = 31 * result + (authors != null ? authors.hashCode() : 0);

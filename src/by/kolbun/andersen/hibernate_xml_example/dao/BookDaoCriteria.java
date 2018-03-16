@@ -1,6 +1,7 @@
 package by.kolbun.andersen.hibernate_xml_example.dao;
 
 import by.kolbun.andersen.hibernate_xml_example.HibernateUtil;
+import by.kolbun.andersen.hibernate_xml_example.entity.Author;
 import by.kolbun.andersen.hibernate_xml_example.entity.Book;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
@@ -45,8 +46,12 @@ public class BookDaoCriteria implements IDao {
     @Override
     public void update(Book t) {
         transaction = getTransaction();
-        Book b = (Book) session.load(Book.class, t.getId());
-        session.update(t);
+        Book b = (Book) session.get(Book.class, t.getId());
+        b.getAuthors().clear();
+        b.getAuthors().addAll(t.getAuthors());
+        b.setTitle(t.getTitle());
+        b.setISBN(t.getISBN());
+        session.update(b);
         System.out.println("update() -> " + printTransInfo());
         transaction.commit();
     }
@@ -72,5 +77,15 @@ public class BookDaoCriteria implements IDao {
 
     private String printTransInfo() {
         return " > info > transaction: " + Integer.toHexString(transaction.hashCode());
+    }
+
+    //
+
+    public List<Author> getAllAuthors() {
+        transaction = getTransaction();
+        Criteria crit = session.createCriteria(Author.class);
+        List<Author> result = crit.list();
+        transaction.commit();
+        return result;
     }
 }

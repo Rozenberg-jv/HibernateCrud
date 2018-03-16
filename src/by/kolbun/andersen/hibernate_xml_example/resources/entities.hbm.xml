@@ -8,7 +8,7 @@
             <generator class="native"/>
         </id>
 
-        <list name="authors" cascade="all">
+        <list name="authors" cascade="all-delete-orphan">
             <key column="book_id"/>
             <list-index column="id_in_list"/>
             <one-to-many class="by.kolbun.andersen.hibernate_xml_example.entity.Author"/>
