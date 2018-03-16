@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="by.kolbun.andersen.hibernate_xml_example.entity.Book" table="books">
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+
+        <list name="authors" cascade="all">
+            <key column="book_id"/>
+            <list-index column="id_in_list"/>
+            <one-to-many class="by.kolbun.andersen.hibernate_xml_example.entity.Author"/>
+        </list>
+
+        <property name="title" column="title" type="string"/>
+        <property name="ISBN" column="ISBN" type="int" unique="true"/>
+    </class>
+
+    <class name="by.kolbun.andersen.hibernate_xml_example.entity.Author" table="authors">
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+
+        <property name="name" column="name" type="string"/>
+        <property name="age" column="age" type="int"/>
+        <property name="status" column="status" type="string"/>
+    </class>
+
+</hibernate-mapping>
